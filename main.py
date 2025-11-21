@@ -8,6 +8,7 @@ CORS(app)  # Enable CORS for all routes
 # Import route handlers
 from routes.live_games import live_games_route
 from routes.live_games_pbp import live_games_pbp_route
+from routes.test import test_route
 
 @app.route("/")
 def home():
@@ -20,6 +21,7 @@ def health():
 # Register routes
 app.add_url_rule("/api/live-games", "live_games", live_games_route, methods=["GET"])
 app.add_url_rule("/api/live-games-pbp", "live_games_pbp", live_games_pbp_route, methods=["GET"])
+app.add_url_rule("/api/test", "test", test_route, methods=["GET"])
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

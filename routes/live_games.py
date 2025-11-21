@@ -422,7 +422,11 @@ def live_games_route():
 
         live_games_api_data = json.loads(all_gp_with_updates.to_json(orient = 'records'))
 
-        response_data = {'success': True, 'games': live_games_api_data}
+        response_data = {
+            'success': True, 
+            'games': live_games_api_data,
+            'timestamp': datetime.datetime.utcnow().isoformat() + 'Z'
+        }
         response = make_response(response_data)
         response.headers['Cache-Control'] = 'public, s-maxage=10, stale-while-revalidate=60'
         return response
@@ -433,7 +437,11 @@ def live_games_route():
         error_msg = f"Exception: {type(e).__name__}: {str(e)}\n"
         error_msg += f"Traceback:\n{traceback.format_exc()}"
         print(error_msg, file=sys.stderr)
-        response_data = {'success': False, 'games': []}
+        response_data = {
+            'success': False, 
+            'games': [],
+            'timestamp': datetime.datetime.utcnow().isoformat() + 'Z'
+        }
         response = make_response(response_data)
         return response
 
