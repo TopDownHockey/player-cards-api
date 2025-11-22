@@ -643,6 +643,8 @@ def live_games_pbp_route():
                 en_fenwicks.loc[:, ['game_id', 'event_index', 'xG']]
             ]), how = 'left')
 
+            df = pbp_with_xg.copy()
+
             pbp_with_xg = pbp_with_xg[pbp_with_xg.event_type.isin(['SHOT', 'BLOCK', 'GOAL', 'MISS'])]
 
             pbp_with_xg = pbp_with_xg.assign(goalie_against = np.where(pbp_with_xg.event_team == pbp_with_xg.home_team, pbp_with_xg.away_goalie, pbp_with_xg.home_goalie))
@@ -707,6 +709,8 @@ def live_games_pbp_route():
 
             response_data = {'success': True, 'shots': pbp_with_xg_json}
             response = make_response(response_data)
+            
+            
             
             # Differential caching based on game state
             if game_is_finished:
