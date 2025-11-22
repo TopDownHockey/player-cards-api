@@ -3,7 +3,7 @@ gunicorn==21.2.0
 pandas==2.1.4
 numpy==1.26.1
 requests==2.32.3
-TopDownHockey_Scraper
+TopDownHockey_Scraper==6.1.8
 onnxruntime
 flask-cors==4.0.0
 psutil
